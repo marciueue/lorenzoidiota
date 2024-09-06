@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accedi alla Fotocamera</title>
+</head>
+<body>
+
+  <h1>Accedi alla Fotocamera</h1>
+  <video id="video" width="100%" autoplay></video>
+  <button id="startButton">Avvia Fotocamera</button>
+
+  <script>
+    const videoElement = document.getElementById('video');
+    const startButton = document.getElementById('startButton');
+
+    startButton.addEventListener('click', async () => {
+      try {
+        // Chiede l'accesso alla fotocamera del dispositivo
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: "user" // Usa "environment" per la fotocamera posteriore
+          }
+        });
+        videoElement.srcObject = stream;
+      } catch (err) {
+        console.error('Errore nell\'accesso alla fotocamera: ', err);
+      }
+    });
+  </script>
+
+</body>
+</html>
